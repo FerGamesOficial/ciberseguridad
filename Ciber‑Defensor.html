@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ciber‑Defensor</title>
+<style>
+:root{--bg:#eef3f1;--card:#fff;--ink:#14211c;--mute:#52625b;--line:#cdd9d3;--acc:#0b6b5c;--acc-ink:#fff;--arena:#dfe9e5;--bad:#b3283a;--ok:#14705a;--okbg:#dff2ea;--badbg:#f8e2e6;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1815;--card:#17241f;--ink:#e9f2ee;--mute:#9db1a9;--line:#2c3e38;--acc:#4fd1b8;--acc-ink:#06201a;--arena:#0b1411;--bad:#ff8a98;--ok:#6fe0bf;--okbg:#13342a;--badbg:#3a2127}}
+:root[data-theme="dark"]{--bg:#0e1815;--card:#17241f;--ink:#e9f2ee;--mute:#9db1a9;--line:#2c3e38;--acc:#4fd1b8;--acc-ink:#06201a;--arena:#0b1411;--bad:#ff8a98;--ok:#6fe0bf;--okbg:#13342a;--badbg:#3a2127}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:820px;margin:0 auto;padding:16px}
+h1{font:700 28px/1.2 Georgia,serif;margin:0}
+.hud{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:10px 0}
+.hud b{font-variant-numeric:tabular-nums}
+.int{flex:1;min-width:160px}
+.int i{display:block;height:12px;background:var(--line);border-radius:8px;overflow:hidden}
+.int u{display:block;height:100%;width:100%;background:var(--ok);text-decoration:none;transition:width .2s,background .2s}
+#ar{position:relative;height:min(54vh,460px);min-height:330px;background:var(--arena);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+#ar::after{content:"Tu equipo 💻";position:absolute;left:0;right:0;bottom:0;height:34px;line-height:34px;text-align:center;font-weight:700;background:var(--card);border-top:2px dashed var(--bad);color:var(--mute);z-index:1}
+.t{position:absolute;width:31%;background:var(--card);border:2px solid var(--line);border-radius:10px;padding:8px 10px;font-size:14px;line-height:1.3;z-index:2}
+.t.on{border-color:var(--acc);box-shadow:0 0 0 3px var(--acc)}
+.t strong{display:block;font-size:16px}
+.t span{color:var(--mute)}
+#fb{min-height:56px;margin:10px 0;padding:10px 14px;border-radius:8px;background:var(--card);border:1px solid var(--line);font-size:15px}
+#fb.g{background:var(--okbg);border-color:var(--ok)}#fb.b{background:var(--badbg);border-color:var(--bad)}
+#df{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+#df button{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px 6px;font:inherit;font-size:14px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px}
+#df button:hover{border-color:var(--acc)}#df button em{font-style:normal;font-size:22px}#df button small{color:var(--mute)}
+button:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.ov{position:absolute;inset:0;z-index:5;background:var(--card);padding:20px;overflow:auto;display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.ov h2{font:700 26px/1.2 Georgia,serif;margin:0}
+.ov p,.ov ul{margin:0}.ov ul{padding-left:20px;font-size:15px;color:var(--mute)}
+.go{background:var(--acc);color:var(--acc-ink);border:0;border-radius:10px;padding:12px 22px;font:inherit;font-weight:700;cursor:pointer}
+#lab{display:none;z-index:8}
+.sim{background:var(--badbg);color:var(--bad);border-radius:6px;padding:4px 10px;font-size:13px;font-weight:700}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:4px 10px;font:inherit;font-size:13px;cursor:pointer}
+#dmw{width:100%;min-height:150px;background:var(--arena);border:1px solid var(--line);border-radius:8px;padding:10px;font:13px/1.7 ui-monospace,Consolas,monospace;flex:1}
+#cp{font-weight:700;min-height:22px}
+.gr{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;text-align:center;font-size:12px}
+.gr div{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:6px 2px;transition:.2s}
+.gr div.x{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+.line{color:var(--bad)}
+.rn{background:#b3283a;color:#fff;border-radius:6px;padding:10px;font-weight:700;margin-top:8px}
+@media(max-width:560px){#df{grid-template-columns:repeat(3,1fr)}.t{width:32%;font-size:12px;padding:6px}.t strong{font-size:13px}.t span{display:none}}
+</style>
+</head>
+<body>
+<main>
+<h1>Ciber‑Defensor</h1>
+<div class="hud"><span>Puntos: <b id="sc">0</b></span><span>Nivel: <b id="lv">1</b></span><span>Neutralizadas: <b id="ok">0</b>/25</span><div class="int"><i><u id="it"></u></i></div><button class="go" id="labb" style="padding:6px 12px;font-size:14px">🧪 Laboratorio</button></div>
+<div id="ar"><div class="ov" id="ov"></div><div class="ov" id="lab"></div></div>
+<div id="fb" aria-live="polite">Elige la defensa para la amenaza resaltada.</div>
+<div id="df"></div>
+</main>
+<script>
+const $=s=>document.querySelector(s);
+const DF=[["av","🛡️","Antivirus"],["ver","🔍","Verificar"],["pwd","🔑","Contraseña única"],["mfa","📱","Dos pasos (2FA)"],["bak","💾","Copia de seguridad"],["upd","🔄","Actualizar"],["src","🏪","Fuentes oficiales"]];
+const TH=[
+["🦠","Virus","Se pega a un archivo y se propaga al abrirlo.",["av"],"El antivirus detecta archivos infectados. Nunca lo desactives para abrir algo."],
+["🪱","Gusano","Se copia solo por la red usando un fallo sin corregir.",["upd"],"Las actualizaciones cierran los fallos que los gusanos aprovechan."],
+["🐴","Troyano","Un programa «gratis» que esconde una puerta trasera.",["src","av"],"Descarga solo de fuentes oficiales; el antivirus ayuda a detectarlo."],
+["🕵️","Spyware","Te espía y roba contraseñas en silencio.",["av"],"Un antivirus actualizado detecta y elimina programas espía."],
+["🔒","Ransomware","Cifra tus archivos y exige un pago.",["bak"],"Una copia de seguridad desconectada y probada te permite recuperarte sin pagar."],
+["🎣","Phishing","Correo urgente con un dominio con una letra cambiada.",["ver"],"No uses el enlace: verifica el dominio y confirma por un canal oficial."],
+["🎭","Ingeniería social","Un «soporte técnico» te pide tu código de verificación.",["ver"],"Haz una pausa y verifica por otro canal. Nunca compartas códigos."],
+["📂","Macros peligrosas","Una factura pide habilitar macros para abrirse.",["ver","av"],"No habilites macros; verifica la factura por otro canal."],
+["💧","Contraseña filtrada","Una filtración expuso la contraseña que repites en todo.",["pwd","mfa"],"Usa una contraseña única por cuenta y activa 2FA."],
+["🥷","Robo de cuenta","Alguien tiene tu contraseña e intenta entrar.",["mfa"],"La verificación en dos pasos agrega otra barrera aunque se filtre la contraseña."],
+["🕳️","Vulnerabilidad","Hay un fallo conocido del sistema sin corregir.",["upd"],"Mantén sistema, navegador y apps actualizados."],
+["📶","Wi‑Fi falsa","Una red pública con un nombre casi igual al del local.",["ver"],"Confirma el nombre exacto de la red y evita operaciones sensibles."]
+];
+let th,sc,okn,hp,lv,gt,ls,run,miss,last,raf,bad,uid;
+const ar=$("#ar");
+$("#df").innerHTML=DF.map((d,i)=>`<button data-id="${d[0]}" aria-label="${d[2]}"><em>${d[1]}</em><span>${i+1}. ${d[2]}</span></button>`).join("");
+$("#df").onclick=e=>{const b=e.target.closest("button");if(b)defend(b.dataset.id)};
+addEventListener("keydown",e=>{const i=+e.key-1;if(i>=0&&i<DF.length)defend(DF[i][0])});
+const nm=id=>DF.find(d=>d[0]==id)[2];
+function fb(t,c){const f=$("#fb");f.textContent=t;f.className=c||""}
+function hud(){$("#sc").textContent=sc;$("#lv").textContent=lv;$("#ok").textContent=okn;const u=$("#it");u.style.width=Math.max(0,hp)+"%";u.style.background=hp>50?"var(--ok)":hp>25?"#d99a00":"var(--bad)"}
+function start(){th&&th.forEach(x=>x.el.remove());th=[];sc=0;okn=0;hp=100;lv=1;gt=0;ls=-9999;miss=new Set;last=-1;bad=0;uid=0;run=true;$("#ov").style.display="none";fb("Elige la defensa para la amenaza resaltada.");hud();runLoop()}
+function runLoop(){cancelAnimationFrame(raf);let p=performance.now();const loop=n=>{if(!run)return;const dt=Math.min(n-p,100);p=n;gt+=dt;step();raf=requestAnimationFrame(loop)};raf=requestAnimationFrame(loop)}
+function spawn(){let i;do{i=Math.floor(Math.random()*TH.length)}while(i==last);last=i;const d=TH[i],el=document.createElement("div");el.className="t";el.innerHTML=`<strong>${d[0]} ${d[1]}</strong><span>${d[2]}</span>`;el.style.left=(1.5+(uid++%3)*33)+"%";ar.appendChild(el);th.push({d,el,b:gt})}
+function step(){const gap=Math.max(1500,3600-lv*280),fall=Math.max(6500,12000-lv*600),H=ar.clientHeight-34;
+if(gt-ls>gap){spawn();ls=gt}
+let top=null,tp=-1;
+for(const t of th.slice()){const p=(gt-t.b)/fall;t.p=p;t.el.style.top=(p*(H-t.el.offsetHeight))+"px";
+if(p>=1){hp-=20;miss.add(t.d[1]);fb(`💥 ${t.d[1]} llegó a tu equipo. ${t.d[4]}`,"b");t.el.remove();th.splice(th.indexOf(t),1);hud();pend=t.d[1];continue}
+if(p>tp){tp=p;top=t}}
+th.forEach(t=>t.el.classList.toggle("on",t===top));
+if(pend){const n=pend;pend=null;run=false;cancelAnimationFrame(raf);openDemo(n,()=>{if(hp<=0)end(false);else{run=true;runLoop()}})}}
+function defend(id){if(!run)return;let t=null;for(const x of th)if(!t||x.p>t.p)t=x;if(!t)return;
+if(t.d[3].includes(id)){sc+=10*lv;okn++;fb(`✔ ${nm(id)} detiene a ${t.d[1]}. ${t.d[4]}`,"g");t.el.remove();th.splice(th.indexOf(t),1);lv=1+Math.floor(okn/5);hud();if(okn>=25)end(true)}
+else{hp-=10;bad++;miss.add(t.d[1]);fb(`✖ ${nm(id)} no sirve contra ${t.d[1]}. ${t.d[4]}`,"b");hud();if(hp<=0)end(false)}}
+function end(w){run=false;cancelAnimationFrame(raf);const o=$("#ov");o.style.display="flex";
+const tot=okn+bad,acc=tot?Math.round(okn/tot*100):0;
+o.innerHTML=`<h2>${w?"¡Eres un Ciber‑Defensor!":"Tu equipo fue comprometido"}</h2><p>Puntos: <b>${sc}</b> · Neutralizadas: <b>${okn}</b> · Precisión: <b>${acc}%</b></p>`+(miss.size?`<p><b>Repasa estas amenazas:</b></p><ul>${[...miss].map(n=>{const d=TH.find(x=>x[1]==n);return`<li>${d[0]} ${d[1]}: ${d[4]}</li>`}).join("")}</ul>`:"<p>No fallaste ninguna. Excelente criterio.</p>")+'<button class="go" id="again">Jugar de nuevo</button>';$("#again").onclick=start}
+let pend=null,tm=[];
+const x=(ms,f)=>tm.push(setTimeout(f,ms));
+const LN=a=>(s,x,cap)=>{a.forEach((l,i)=>x(i*800,()=>{const d=document.createElement("div");d.innerHTML=l;s.appendChild(d)}));x(a.length*800,cap)};
+const R=t=>`<span class=line>${t}</span>`;
+const DM={
+virus:(s,x,cap)=>{s.innerHTML='<div class="gr">'+Array.from({length:12},(_,i)=>`<div>📄<br>doc${i+1}</div>`).join("")+"</div>";s.querySelectorAll(".gr div").forEach((e,i)=>x(300+i*250,()=>{e.classList.add("x");e.firstChild.textContent="🦠"}));x(3500,cap)},
+worm:(s,x,cap)=>{s.innerHTML='<div class="gr">'+Array.from({length:12},(_,i)=>`<div>💻<br>PC ${i+1}</div>`).join("")+"</div>";const c=s.querySelectorAll(".gr div"),ig=new Set([0]);c[0].classList.add("x");for(let k=1;k<=4;k++)x(k*750,()=>{[...ig].forEach(i=>[i-1,i+1,i-6,i+6].forEach(j=>{if(j>=0&&j<12&&!(i%6==5&&j==i+1)&&!(i%6==0&&j==i-1)){ig.add(j);c[j].classList.add("x")}}))});x(4200,cap)},
+ransom:(s,x,cap)=>{const f=["foto_viaje.jpg","tarea.docx","musica.mp3","cuentas.xlsx","proyecto.zip"];s.innerHTML=f.map(n=>`<div>📄 <span>${n}</span></div>`).join("");s.querySelectorAll("div").forEach((e,i)=>x(500+i*600,()=>{e.innerHTML=R("🔒 "+f[i]+".locked")}));x(3800,()=>{s.insertAdjacentHTML("beforeend",'<div class="rn">Tus archivos fueron cifrados. Paga en 48 horas o los perderás. (mensaje falso de ejemplo)</div>')});x(4800,cap)},
+troy:LN(["📥 Instalas «Programa_GRATIS.exe»…","✅ Instalado. Parece normal.",R("👤 Un atacante abrió una conexión remota"),R("👁️ Está viendo tu pantalla"),R("📤 Copiando tus archivos…")]),
+spy:LN(["⌨️ Escribes: ana@correo.example","⌨️ Escribes: ••••••••••",R("📤 Copia enviada al atacante: usuario y contraseña"),R("📸 Capturas de tu pantalla enviadas cada minuto")]),
+phish:LN(["📧 «Tu cuenta se cerrará en 5 minutos. Confirma aquí»","🌐 Abres https://banc0-seguro.example (la «o» es un cero)","⌨️ Escribes tu usuario y contraseña en la página falsa",R("📤 Los datos llegaron al atacante"),R("🏦 Intenta entrar a tu banco con ellos")]),
+take:LN(["🔔 Inicio de sesión desde un dispositivo desconocido",R("🔑 La contraseña fue cambiada"),R("✉️ Mensaje a tus contactos: «necesito dinero urgente»"),R("🛠️ Cambió tu correo de recuperación")]),
+chat:LN(["💬 «Soporte»: Detectamos un virus en tu equipo.","💬 «Soporte»: Dime el código que te llegó por SMS.","🙂 Compartes el código…",R("🔓 El atacante entra a tu cuenta con tu código")]),
+macro:LN(["📎 Abres «Factura.docx» y habilitas las macros",R("⚙️ La macro descarga otro programa"),R("🦠 Se instala malware en tu equipo")]),
+leak:LN(["💧 Un sitio sufre una filtración de contraseñas",R("🔎 Prueban tu contraseña en tu correo, redes y banco"),R("🔓 Entran a todas las cuentas donde la repetías")]),
+wifi:LN(["📶 Te conectas a «Cafe_Gratis_WiFi» (no es la red del local)","⌨️ Intentas entrar a tu banco desde esa red",R("🪤 La red falsa te redirige a una página falsa"),R("📤 Tus datos llegan al atacante")])
+};
+const M={"Virus":"virus","Gusano":"worm","Vulnerabilidad":"worm","Ransomware":"ransom","Troyano":"troy","Spyware":"spy","Phishing":"phish","Robo de cuenta":"take","Ingeniería social":"chat","Macros peligrosas":"macro","Contraseña filtrada":"leak","Wi‑Fi falsa":"wifi"};
+function play(n){tm.forEach(clearTimeout);tm=[];const d=TH.find(t=>t[1]==n),s=$("#dmw");s.innerHTML="";$("#cp").textContent="";DM[M[n]](s,x,()=>{$("#cp").textContent="Cómo evitarlo: "+d[4]})}
+function openDemo(n,cb,ch){const l=$("#lab");l.style.display="flex";
+l.innerHTML=`<h2>${ch?"🧪 Laboratorio: qué pueden hacer":"Esto es lo que habría pasado: "+n}</h2><p class="sim">SIMULACIÓN: todo ocurre dentro de esta página y no afecta tu equipo.</p>`+(ch?'<div class="chips">'+TH.map(t=>`<button data-n="${t[1]}">${t[0]} ${t[1]}</button>`).join("")+"</div>":"")+'<div id="dmw">'+(ch?"Elige una amenaza para ver su efecto.":"")+'</div><p id="cp"></p><button class="go" id="lc">'+(ch?"Cerrar":"Continuar")+"</button>";
+l.onclick=e=>{const b=e.target.closest(".chips button");if(b)play(b.dataset.n)};
+$("#lc").onclick=()=>{tm.forEach(clearTimeout);tm=[];l.style.display="none";cb&&cb()};
+if(!ch)play(n)}
+$("#labb").onclick=()=>{const was=run;if(run){run=false;cancelAnimationFrame(raf)}openDemo(null,()=>{if(was){run=true;runLoop()}},1)};
+$("#ov").innerHTML='<h2>Ciber‑Defensor</h2><p>Las amenazas caen hacia tu equipo. Elige la defensa correcta para la amenaza resaltada, que es la más cercana.</p><ul><li>Cada acierto suma puntos; cada error o amenaza que llega daña tu equipo.</li><li>Usa los botones o las teclas 1 a 7.</li><li>Si una amenaza llega a tu equipo, verás una simulación de lo que habría pasado. Con 🧪 Laboratorio puedes ver qué hace cada una.</li><li>Neutraliza 25 amenazas para ganar. Cada 5 aciertos sube el nivel y la velocidad.</li></ul><button class="go" id="st">Empezar</button>';
+$("#st").onclick=start;
+</script>
+</body>
+</html>
